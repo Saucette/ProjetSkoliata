@@ -14,7 +14,7 @@ public class Critere implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="CRITERE_ID_GENERATOR", sequenceName="CRITERE_ID_SEQ",allocationSize=1)
+	@SequenceGenerator(name="CRITERE_ID_GENERATOR", sequenceName="CRITERE_ID_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="CRITERE_ID_GENERATOR")
 	private Integer id;
 
@@ -94,6 +94,11 @@ public class Critere implements Serializable {
 
 	public void setGrille(Grille grille) {
 		this.grille = grille;
+	}
+
+	@Override
+	public String toString() {
+		return "Critere [id=" + id + ", description=" + description + "]";
 	}
 
 }

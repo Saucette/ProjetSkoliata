@@ -15,7 +15,7 @@ public class Enseignant implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ENSEIGNANT_ID_GENERATOR", sequenceName="ENSEIGNANT_ID_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ENSEIGNANT_ID_GENERATOR", sequenceName="ENSEIGNANT_ID_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ENSEIGNANT_ID_GENERATOR")
 	private Integer id;
 
@@ -30,8 +30,8 @@ public class Enseignant implements Serializable {
 	@OneToMany(mappedBy="enseignant")
 	private Set<Asso3e> asso3es;
 
-	//bi-directional many-to-one association to Grille
-	@OneToMany(mappedBy="enseignant")
+	//bi-directional many-to-many association to Grille
+	@ManyToMany(mappedBy="enseignants")
 	private Set<Grille> grilles;
 
 	public Enseignant() {
@@ -97,20 +97,6 @@ public class Enseignant implements Serializable {
 
 	public void setGrilles(Set<Grille> grilles) {
 		this.grilles = grilles;
-	}
-
-	public Grille addGrille(Grille grille) {
-		getGrilles().add(grille);
-		grille.setEnseignant(this);
-
-		return grille;
-	}
-
-	public Grille removeGrille(Grille grille) {
-		getGrilles().remove(grille);
-		grille.setEnseignant(null);
-
-		return grille;
 	}
 
 }

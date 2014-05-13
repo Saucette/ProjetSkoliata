@@ -15,7 +15,7 @@ public class Grille implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="GRILLE_ID_GENERATOR", sequenceName="GRILLE_ID_SEQ",allocationSize=1)
+	@SequenceGenerator(name="GRILLE_ID_GENERATOR", sequenceName="GRILLE_ID_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="GRILLE_ID_GENERATOR")
 	private Integer id;
 
@@ -41,10 +41,18 @@ public class Grille implements Serializable {
 	@OneToMany(mappedBy="grille")
 	private Set<Critere> criteres;
 
-	//bi-directional many-to-one association to Enseignant
-	@ManyToOne
-	@JoinColumn(name="id_droit_modification")
-	private Enseignant enseignant;
+	//bi-directional many-to-many association to Enseignant
+	@ManyToMany
+	@JoinTable(
+		name="droit"
+		, joinColumns={
+			@JoinColumn(name="id_grille")
+			}
+		, inverseJoinColumns={
+			@JoinColumn(name="id_enseignant")
+			}
+		)
+	private Set<Enseignant> enseignants;
 
 	public Grille() {
 	}
@@ -141,12 +149,21 @@ public class Grille implements Serializable {
 		return critere;
 	}
 
-	public Enseignant getEnseignant() {
-		return this.enseignant;
+	public Set<Enseignant> getEnseignants() {
+		return this.enseignants;
 	}
 
-	public void setEnseignant(Enseignant enseignant) {
-		this.enseignant = enseignant;
+	public void setEnseignants(Set<Enseignant> enseignants) {
+		this.enseignants = enseignants;
+	}
+
+	@Override
+	public String toString() {
+		return "Grille associée [id=" + id + ", niveauPerformance1="
+				+ niveauPerformance1 + ", niveauPerformance2="
+				+ niveauPerformance2 + ", niveauPerformance3="
+				+ niveauPerformance3 + ", niveauPerformance4="
+				+ niveauPerformance4 + ", nom=" + nom + "]";
 	}
 
 }

@@ -74,23 +74,23 @@ public class ServicesLocator
 		// pour les contrôles (utilisés dans la servlet ControleDAOServlet) :
 		// ils ne sont normalement pas appelés par la couche IHM.
 		
-		else if(nomEJB.equals("EntrepriseDAO"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/EntrepriseDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.EntrepriseDAO";
+		else if(nomEJB.equals("CritereDAO"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/CritereDAO";
 		
-		else if(nomEJB.equals("CandidatureDAO"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/CandidatureDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.CandidatureDAO";
+		else if(nomEJB.equals("EleveDAO"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/EleveDAO";
 		
-		else if(nomEJB.equals("MessageCandidatureDAO"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/MessageCandidatureDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.MessageCandidatureDAO";
+		else if(nomEJB.equals("ObjectifPedagogiqueDAO"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ObjectifPedagogiqueDAO";
 		
-		else if(nomEJB.equals("MessageOffreEmploiDAO"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/MessageOffreEmploiDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.MessageOffreEmploiDAO";
+		else if(nomEJB.equals("EnseignementDAO"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/EnseignementDAO";
 		
-		else if(nomEJB.equals("NiveauQualificationDAO"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/NiveauQualificationDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.NiveauQualificationDAO";
+		else if(nomEJB.equals("GrilleDAO"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/GrilleDAO!dao.GrilleDAO";
 		
-		else if(nomEJB.equals("SecteurActiviteDAO"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/SecteurActiviteDAO!eu.telecom_bretagne.cabinet_recrutement.data.dao.SecteurActiviteDAO";
+		else if(nomEJB.equals("EnseignantDAO"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/EnseignantDAO";
 		
 		else
 			throw new ServicesLocatorException("Il n'y a pas d'EJB avec ce nom...");

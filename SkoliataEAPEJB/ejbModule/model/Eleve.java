@@ -15,7 +15,7 @@ public class Eleve implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ELEVE_ID_GENERATOR", sequenceName="ELEVE_ID_SEQ",allocationSize=1)
+	@SequenceGenerator(name="ELEVE_ID_GENERATOR", sequenceName="ELEVE_ID_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ELEVE_ID_GENERATOR")
 	private Integer id;
 

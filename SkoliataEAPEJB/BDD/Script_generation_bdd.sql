@@ -18,6 +18,7 @@ drop table if exists eleve CASCADE;
 drop table if exists objectif_pedagogique CASCADE;
 drop table if exists ASSO_3E CASCADE;
 drop table if exists ASSO_OGE CASCADE;
+drop table if exists DROIT CASCADE;
 
 -- +----------------------------------------------------------------------------------------------+
 -- | Création des tables                                                                          |
@@ -63,15 +64,6 @@ CREATE TABLE grille
     niveau_performance_4 varchar(50) 			
 ) ;
 
--- Par défaut : un enseignant quelconque possède un droit de lecture sur toutes les grilles.
--- Il peut possèder un droit (écriture, suppression, modification ...etc)
-
-CREATE TABLE droit
-(
-	id_enseignant integer not null references enseignant,
-	id_grille integer not null references grille
-) ;
-
 -- La description du niveau de performance X de la table critère correspond au niveau de performance X de la table grille
 -- Exemple : desc_niveau_performance 1 = "L'étudiant a rendu le projet terminé à 100%" -- niveau_performance_1 = "Très Bien"
 
@@ -86,7 +78,9 @@ CREATE TABLE critere
 	desc_niveau_performance_4 varchar(500) 
 ) ;
 
-CREATE TABLE ASSO_OGE -- représente les triplets OP, grille, enseignement
+-- Cette table représente l'association entre un objectif pédagogique, une grille, et un enseignement
+
+CREATE TABLE ASSO_OGE 
 (
     id_OP    integer not null references objectif_pedagogique,
 	id_grille integer not null references grille,
@@ -94,14 +88,28 @@ CREATE TABLE ASSO_OGE -- représente les triplets OP, grille, enseignement
     primary key (id_grille, id_enseignement, id_OP)
 ) ;
   
-CREATE TABLE ASSO_3E  -- représente les triplets élève, enseignant, enseignement
+
+-- Cette table représente l'association entre un élève, une enseignant, et un enseignement
+
+CREATE TABLE ASSO_3E
  (
     id_enseignement integer not null references enseignement,
     id_enseignant   integer not null references enseignant,
     id_eleve        integer not null references eleve,
     primary key (id_enseignant, id_enseignement, id_eleve)
  ) ;
-  
+ 
+ -- Par défaut : un enseignant quelconque possède un droit de lecture sur toutes les grilles,
+-- On ne représente dans cette table uniquement les droits autres que le droit de lecture par défaut
+-- Id est, un droit global qui comprend : modification, suppression...etc.
+
+CREATE TABLE DROIT
+(
+	id_enseignant integer not null references enseignant,
+	id_grille integer not null references grille,
+	description text,
+	primary key (id_enseignant,id_grille)
+) ;
 -- +----------------------------------------------------------------------------------------------+
 -- | Insertion de quelques données de pour les tests                                              |
 -- +----------------------------------------------------------------------------------------------+
@@ -137,14 +145,14 @@ insert into enseignement values (nextval('enseignement_id_seq'), 'Préparation à 
   
   -- GRILLE -------------------------------------------------------------------------------------------------
   
-insert into grille values (nextval('grille_id_seq'),'1', 'Evaluation générale de Java','Bien', 'Assez Bien', 'Moyen','Insuffisant');
-insert into grille values (nextval('grille_id_seq'),'1', 'Evaluation générale de projet BDD','Bien', 'Moyen', 'Insuffisant');
-insert into grille values (nextval('grille_id_seq'),'3', 'Evaluation pratique de secourisme','Acquis', 'Non-acquis');
+insert into grille values (nextval('grille_id_seq'), 'Evaluation générale de Java','Bien', 'Assez Bien', 'Moyen','Insuffisant');
+insert into grille values (nextval('grille_id_seq'), 'Evaluation générale de projet BDD','Bien', 'Moyen', 'Insuffisant');
+insert into grille values (nextval('grille_id_seq'), 'Evaluation pratique de secourisme','Acquis', 'Non-acquis');
  
   -- CRITERE -------------------------------------------------------------------------------------------------
  
 insert into critere values (nextval('critere_id_seq'), '1','Respecter les délais de livraison', 
-'La livraison a été faite avant la date limite'
+'La livraison a été faite avant la date limite',
 'La livraison a été faite après la date limite mais soit l''étudiant peut justifier le retard soit le retard n''est pas significatif',
 '',
 'La livraison a été faite bien après la date limite sans justification'
@@ -153,7 +161,7 @@ insert into critere values (nextval('critere_id_seq'), '1','Respecter les délais
 insert into critere values (nextval('critere_id_seq'), '1', 'Prendre en compte les remarques', 
 'Toutes les remarques du tuteur sont prises en compte. L''étudiant demande des explications supplémentaires',
 'Les remarques sont prises en compte sans interaction avec le tuteur',
-'Certaines remarques nécessitant peu d''effort sont prises en compte. Les autres sont ignorées'
+'Certaines remarques nécessitant peu d''effort sont prises en compte. Les autres sont ignorées',
 'Aucune remarque n''est prise en compte'
 );
  
@@ -182,4 +190,7 @@ insert into ASSO_3E values ('1','1','3');
 insert into ASSO_OGE values ('1','1','1'); -- Java - Grille 1 - Génie logiciel
 insert into ASSO_OGE values ('1','2','2'); -- Java - Grille 2 - Bases de données
 
+-- DROIT -----------------------------------------------------------------------------------------------------
+
+insert into DROIT values ('1','1', 'Modification / Suppression');
 

@@ -19,6 +19,7 @@
 		<class>model.Enseignement</class>
 		<class>model.Grille</class>
 		<class>model.ObjectifPedagogique</class>
+		<class>model.Droit</class>
 
 	</persistence-unit>
 
