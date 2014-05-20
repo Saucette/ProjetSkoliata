@@ -64,6 +64,16 @@ public class GrilleDAO
 	}
 
 	//----------------------------------------------------------------------------
+	
+	public Grille findByName(String name)
+
+	{
+
+		return entityManager.find(Grille.class, name);
+
+	}
+
+	//----------------------------------------------------------------------------
 
   @SuppressWarnings({ "rawtypes", "unchecked" })
 
