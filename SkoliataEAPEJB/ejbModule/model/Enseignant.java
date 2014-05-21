@@ -30,6 +30,10 @@ public class Enseignant implements Serializable {
 	@OneToMany(mappedBy="enseignant")
 	private Set<Asso3e> asso3es;
 
+	//bi-directional many-to-one association to Droit
+	@OneToMany(mappedBy="enseignant")
+	private Set<Droit> droits;
+
 	//bi-directional many-to-many association to Grille
 	@ManyToMany(mappedBy="enseignants")
 	private Set<Grille> grilles;
@@ -89,6 +93,28 @@ public class Enseignant implements Serializable {
 		asso3e.setEnseignant(null);
 
 		return asso3e;
+	}
+
+	public Set<Droit> getDroits() {
+		return this.droits;
+	}
+
+	public void setDroits(Set<Droit> droits) {
+		this.droits = droits;
+	}
+
+	public Droit addDroit(Droit droit) {
+		getDroits().add(droit);
+		droit.setEnseignant(this);
+
+		return droit;
+	}
+
+	public Droit removeDroit(Droit droit) {
+		getDroits().remove(droit);
+		droit.setEnseignant(null);
+
+		return droit;
 	}
 
 	public Set<Grille> getGrilles() {

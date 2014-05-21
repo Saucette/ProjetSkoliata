@@ -57,7 +57,8 @@ CREATE TABLE enseignement
 CREATE TABLE grille
 (
     id serial primary key,
-    nom text not null, 							 
+    nom text not null,
+    valide boolean,
     niveau_performance_1 varchar(50) not null, 	
     niveau_performance_2 varchar(50) not null, 	
     niveau_performance_3 varchar(50),			
@@ -145,9 +146,9 @@ insert into enseignement values (nextval('enseignement_id_seq'), 'Préparation à 
   
   -- GRILLE -------------------------------------------------------------------------------------------------
   
-insert into grille values (nextval('grille_id_seq'), 'Evaluation générale de Java','Bien', 'Assez Bien', 'Moyen','Insuffisant');
-insert into grille values (nextval('grille_id_seq'), 'Evaluation générale de projet BDD','Bien', 'Moyen', 'Insuffisant');
-insert into grille values (nextval('grille_id_seq'), 'Evaluation pratique de secourisme','Acquis', 'Non-acquis');
+insert into grille values (nextval('grille_id_seq'), 'Evaluation générale de Java',FALSE,'Bien', 'Assez Bien', 'Moyen','Insuffisant');
+insert into grille values (nextval('grille_id_seq'), 'Evaluation générale de projet BDD',FALSE,'Bien', 'Moyen', 'Insuffisant');
+insert into grille values (nextval('grille_id_seq'), 'Evaluation pratique de secourisme',FALSE,'Acquis', 'Non-acquis');
  
   -- CRITERE -------------------------------------------------------------------------------------------------
  

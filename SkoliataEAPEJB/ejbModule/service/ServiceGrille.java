@@ -5,10 +5,9 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import java.util.List;
-import java.util.UUID;
 
 import model.*;
-import dao.GrilleDAO;
+import dao.*;
 
 /**
  * Session Bean implementation class ServiceGrille
@@ -18,8 +17,8 @@ import dao.GrilleDAO;
 public class ServiceGrille implements IServiceGrille {
 
 	@EJB private GrilleDAO grilleDAO;
-//	@EJB private NiveauQualificationDAO  niveauDAO;
-//	@EJB private CandidatureDAO  candidatureDAO;
+	@EJB private CritereDAO critereDAO;
+	@EJB private CritereDAO droitDAO;
     /**
      * Default constructor. 
      */
@@ -33,16 +32,18 @@ public class ServiceGrille implements IServiceGrille {
     	    Grille grille = new Grille();
     	    grille.setNiveauPerformance1(n1);
     	    grille.setNiveauPerformance2(n2);
-    	    grille.setNom("Exemple_grille");
-    	    // Insertion dans la table DROITS pour la notion de propriétaire
-    	    // Etat non validé ? Attribut de l'objet grille, ou bien :  processus de création de la grille = non validé / grille complétée = validé
+    	    grille.setNom("Grille1");
+    	    grille.setValide(false);
+    	    
+    	    // TODO : Insertion dans la table DROITS pour la notion de propriétaire 
+  
     	    if(nb_niv>2)
     	    {
     	    	grille.setNiveauPerformance3(n3);
     	    	grille.setNiveauPerformance4(n4);
     	    }
     	    return grilleDAO.persist(grille);
-    	   // Idée pour l'auto génération ? : grille.setNom("grille"+grille.getId());
+    	   // TODO : Idée pour l'auto génération ? : grille.setNom("grille"+grille.getId());
     	    
         }
 
@@ -61,6 +62,7 @@ public class ServiceGrille implements IServiceGrille {
 		}
 		
 		// FD4 : Ajouter un critère à une grille d'évaluation
+		@Override
 		public Grille addCritere(String nom_grille, String description_critere, String description_n1,String description_n2,String description_n3,String description_n4)
 		{
 			Integer i = 0;
@@ -70,6 +72,7 @@ public class ServiceGrille implements IServiceGrille {
 			critere.setDescNiveauPerformance1(description_n1);
 			critere.setDescNiveauPerformance2(description_n2);
 			i=2;
+			// Vérification pour que l'utilisateur rentre le bon nombre de niveaux (critère <---> grille)
 			if(description_n3 != "")
 			{ 
 				critere.setDescNiveauPerformance3(description_n3);
@@ -80,13 +83,45 @@ public class ServiceGrille implements IServiceGrille {
 					i=4;
 				}
 			}
-			if(i== grilletmp.getCriteres().size())
+			if(i == grilletmp.getCriteres().size())
 			{
 				grilletmp.addCritere(critere);
-				//grilleDAO.persist(grille) ???
 				return grilletmp;
 				
 			}
 			return null;
+		}
+		
+		//FD5 : Obtenir les informations de définition d'un critère d'une grille
+		@Override
+		public Critere getCritereByGrille(String nom_grille, Integer id_critere)
+		{
+			if(grilleDAO.findByName(nom_grille).getId() == id_critere) return critereDAO.findById(id_critere);	
+			return null;	
+		}
+		
+		//FD6 : Valider une grille d'évaluation
+		@Override
+		public void validation(String nom_grille)
+		{
+			grilleDAO.validation(nom_grille);
+			return;
+		}
+		
+		//FD7 : Créer une grille d'évaluation à partir d'une grille existante
+		public Grille copy(String nom_g1, String nom_g2)
+		{
+			Grille grille = new Grille();
+			Grille tmp = grilleDAO.findByName(nom_g1);
+			
+			grille.setCriteres(tmp.getCriteres());
+			grille.setNiveauPerformance1(tmp.getNiveauPerformance1());
+			grille.setNiveauPerformance2(tmp.getNiveauPerformance2());
+			grille.setNiveauPerformance3(tmp.getNiveauPerformance3());
+			grille.setNiveauPerformance4(tmp.getNiveauPerformance4());
+    	    grille.setNom("Grille2");
+    	    grille.setValide(false);
+    	    
+    	    return grille;
 		}
 }

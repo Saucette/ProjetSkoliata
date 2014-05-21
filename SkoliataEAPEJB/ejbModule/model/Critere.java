@@ -96,9 +96,4 @@ public class Critere implements Serializable {
 		this.grille = grille;
 	}
 
-	@Override
-	public String toString() {
-		return "Critere [id=" + id + ", description=" + description + "]";
-	}
-
 }

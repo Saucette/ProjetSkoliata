@@ -33,6 +33,8 @@ public class Grille implements Serializable {
 
 	private String nom;
 
+	private Boolean valide;
+
 	//bi-directional many-to-one association to AssoOge
 	@OneToMany(mappedBy="grille")
 	private Set<AssoOge> assoOges;
@@ -40,6 +42,10 @@ public class Grille implements Serializable {
 	//bi-directional many-to-one association to Critere
 	@OneToMany(mappedBy="grille")
 	private Set<Critere> criteres;
+
+	//bi-directional many-to-one association to Droit
+	@OneToMany(mappedBy="grille")
+	private Set<Droit> droits;
 
 	//bi-directional many-to-many association to Enseignant
 	@ManyToMany
@@ -105,6 +111,14 @@ public class Grille implements Serializable {
 		this.nom = nom;
 	}
 
+	public Boolean getValide() {
+		return this.valide;
+	}
+
+	public void setValide(Boolean valide) {
+		this.valide = valide;
+	}
+
 	public Set<AssoOge> getAssoOges() {
 		return this.assoOges;
 	}
@@ -149,21 +163,34 @@ public class Grille implements Serializable {
 		return critere;
 	}
 
+	public Set<Droit> getDroits() {
+		return this.droits;
+	}
+
+	public void setDroits(Set<Droit> droits) {
+		this.droits = droits;
+	}
+
+	public Droit addDroit(Droit droit) {
+		getDroits().add(droit);
+		droit.setGrille(this);
+
+		return droit;
+	}
+
+	public Droit removeDroit(Droit droit) {
+		getDroits().remove(droit);
+		droit.setGrille(null);
+
+		return droit;
+	}
+
 	public Set<Enseignant> getEnseignants() {
 		return this.enseignants;
 	}
 
 	public void setEnseignants(Set<Enseignant> enseignants) {
 		this.enseignants = enseignants;
-	}
-
-	@Override
-	public String toString() {
-		return "Grille associée [id=" + id + ", niveauPerformance1="
-				+ niveauPerformance1 + ", niveauPerformance2="
-				+ niveauPerformance2 + ", niveauPerformance3="
-				+ niveauPerformance3 + ", niveauPerformance4="
-				+ niveauPerformance4 + ", nom=" + nom + "]";
 	}
 
 }
