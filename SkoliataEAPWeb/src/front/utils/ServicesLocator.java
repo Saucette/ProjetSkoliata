@@ -19,7 +19,7 @@ public class ServicesLocator
 	{
     try
     {
-	    initialContext = new InitialContext();
+	    	initialContext = new InitialContext();
 			cache = new HashMap<String, Object>();
     }
     catch (NamingException e)
@@ -49,23 +49,23 @@ public class ServicesLocator
 		
 		String nomJNDI = null;
 		
-		if(nomEJB.equals("ServiceEntreprise"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/ServiceEntreprise!eu.telecom_bretagne.cabinet_recrutement.service.IServiceEntreprise";
+		if(nomEJB.equals("ServiceEnseignant"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ServiceEnseignant!service.IServiceEnseignant";
 
-		else if(nomEJB.equals("ServiceOffreEmploi"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/ServiceOffreEmploi!eu.telecom_bretagne.cabinet_recrutement.service.IServiceOffreEmploi";
+		else if(nomEJB.equals("ServiceEleve"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ServiceEleve!service.ServiceEleve";
 
-		else if(nomEJB.equals("ServiceIndexation"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/ServiceIndexation!eu.telecom_bretagne.cabinet_recrutement.service.IServiceIndexation";
+		else if(nomEJB.equals("ServiceCritere"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ServiceCritere!service.ServiceCritere";
 
-		else if(nomEJB.equals("ServiceCandidature"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/ServiceCandidature!eu.telecom_bretagne.cabinet_recrutement.service.IServiceCandidature";
+		else if(nomEJB.equals("ServiceObjectifPedagogique"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ServiceObjectifPedagogiqueDAO!service.ServiceObjectifPedagogique";
 
-		else if(nomEJB.equals("ServiceMessageCandidature"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/ServiceMessageCandidature!eu.telecom_bretagne.cabinet_recrutement.service.IServiceMessageCandidature";
+		else if(nomEJB.equals("ServiceEnseignement"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ServiceEnseignement!service.ServiceEnseignement";
 
-		else if(nomEJB.equals("ServiceMessageOffreEmploi"))
-			nomJNDI = "java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/ServiceMessageOffreEmploi!eu.telecom_bretagne.cabinet_recrutement.service.IServiceMessageOffreEmploi";
+		else if(nomEJB.equals("ServiceGrille"))
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ServiceGrille!service.ServiceGrille"; 
 
 		// Pour les contrôles de DAO par les élèves
 		// ========================================
@@ -87,7 +87,7 @@ public class ServicesLocator
 			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/EnseignementDAO";
 		
 		else if(nomEJB.equals("GrilleDAO"))
-			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/GrilleDAO!dao.GrilleDAO";
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/GrilleDAO";
 		
 		else if(nomEJB.equals("EnseignantDAO"))
 			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/EnseignantDAO";

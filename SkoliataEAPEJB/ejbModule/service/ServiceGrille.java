@@ -5,6 +5,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
 import java.util.List;
+import java.util.Set;
 
 import model.*;
 import dao.*;
@@ -47,9 +48,16 @@ public class ServiceGrille implements IServiceGrille {
     	    
         }
 
+    	
+    	@Override 
+    	public Grille getById(Integer id)
+    	{
+    		return grilleDAO.findById(id);
+    	}
+    	
     	// FD2 : Obtenir les informations de définition d'une grille d'évaluation
 		@Override
-		public Grille getGrille(String nom) 
+		public Grille getByName(String nom) 
 		{
 			return grilleDAO.findByName(nom);
 		}
@@ -92,6 +100,14 @@ public class ServiceGrille implements IServiceGrille {
 			return null;
 		}
 		
+		@Override
+		public Set <Critere> getAllCritereById(Integer id_grille)
+		{
+			Grille grille = grilleDAO.findById(id_grille);
+			Set <Critere> criteres = grille.getCriteres();
+
+			return criteres;
+		}
 		//FD5 : Obtenir les informations de définition d'un critère d'une grille
 		@Override
 		public Critere getCritereByGrille(String nom_grille, Integer id_critere)

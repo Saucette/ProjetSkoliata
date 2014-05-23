@@ -1,6 +1,7 @@
 package service;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Remote;
 
@@ -15,7 +16,7 @@ public interface IServiceGrille {
 	 * @return retourne la grille concernée
 	 */
 	
-	Grille getGrille(String nom);
+	Grille getByName(String nom);
 	
 	/** Création d'une nouvelle grille
 	 * 
@@ -65,4 +66,17 @@ public interface IServiceGrille {
 	 */
 	void validation(String nom_grille);
 
+	/** Obtention d'une grille par son id
+	 * @param id id de la grille
+	 * @return retourne la grille concernée
+	 */
+
+	Grille getById(Integer id);
+
+	/** Obtention du Set de criteres d'une grille
+	 * 
+	 * @param id_grille id de la grille
+	 * @return
+	 */
+	Set <Critere> getAllCritereById(Integer id_grille);
 }

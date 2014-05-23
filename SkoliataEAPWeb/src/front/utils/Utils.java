@@ -67,6 +67,7 @@ public class Utils
 	 */
 	public static String text2HTML(String contenu)
 	{
+		if(contenu.equals("") || contenu == null) return "";
 		return contenu.replace("\n", "<br/>").trim();
 	}
 	//-----------------------------------------------------------------------------

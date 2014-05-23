@@ -193,4 +193,15 @@ public class Grille implements Serializable {
 		this.enseignants = enseignants;
 	}
 
+	@Override
+	public String toString() {
+		return "Grille [id=" + id + ", niveauPerformance1="
+				+ niveauPerformance1 + ", niveauPerformance2="
+				+ niveauPerformance2 + ", niveauPerformance3="
+				+ niveauPerformance3 + ", niveauPerformance4="
+				+ niveauPerformance4 + ", nom=" + nom + ", valide=" + valide
+				+ ", assoOges=" + assoOges + ", criteres=" + criteres
+				+ ", droits=" + droits + ", enseignants=" + enseignants + "]";
+	}
+
 }
