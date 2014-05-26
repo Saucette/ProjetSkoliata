@@ -40,71 +40,54 @@
 		  	System.out.println("--------------------> grille = " + grille);
 		    %>
 		    
-		    <!-- Affichage des information récupérées -->
-		    
-		    <h2>Informations sur la grille :</h2>
-
+		    <!-- Affichage des information récupérées --> 
+		    <h2>Informations sur la grille : <%=grille.getNom() %></h2>
 		    <table id="affichage">
-		      <tr>
-		        <th style="width: 170px;">Identifiant :</th>
-		        <td>
-		          ENT_<%=grille.getId()%>
-		        </td>
-		      </tr>
-		      
-		      <tr>
-		        <th>Nom :</th>
-		        <td>
-		        <%=grille.getNom()%>
-		        </td>
-		      </tr> 
-		      
-		      <tr>
-		      	<th>Validée :</th>
-		      	<%=grille.getNom()%>
-		      	<%if(grille.getValide()) tmp = "Oui"; else tmp = "Non"; %>
-		      	<td><%=tmp%> </td>
-		      </tr> 
-		       
-	          <tr>
-	        	<th>Niveau 1 :</th>
+		    <tr>
+		        <th style="width: 170px;">ID : GRL <%=grille.getId()%></th>
+		        <%if(grille.getValide()) tmp = "Oui"; else tmp = "Non"; %>     
+		    </tr>
+		    <tr>
+		    <th>Valide : <%=tmp%></th> 
+		    </tr>
+		    <tr>
+	        	<th>Niveaux :</th>
 	        	<td>
 	           	<%=Utils.text2HTML(grille.getNiveauPerformance1())%>
 	        	</td>
-	         </tr>
-		        
-		      <tr>
-		        <th>Niveau 2 :</th>
-		        <td>
-		          <%=Utils.text2HTML(grille.getNiveauPerformance2())%>
-		        </td>
-		        </tr>
-		      
-		      <tr>
-		        <th>Niveau 3 :</th>
-		        <% if((tmp=grille.getNiveauPerformance3())==null) tmp = "";
+	        	<td>
+	           	<%=Utils.text2HTML(grille.getNiveauPerformance2())%>
+	        	</td>
+	        	<% if((tmp=grille.getNiveauPerformance3())==null) tmp = "";
 		        else tmp=Utils.text2HTML(grille.getNiveauPerformance3());%> 
-		        <td>
-		        <%=tmp%>
-		        </td>
-		      </tr>
-		      
-		      <tr>
-		        <th>Niveau 4 :</th>
-		        <% if((tmp=grille.getNiveauPerformance4())==null) tmp = "";
+	        	<td>
+	           	<%=tmp%>
+	        	</td>
+	        	<% if((tmp=grille.getNiveauPerformance4())==null) tmp = "";
 		        else tmp=Utils.text2HTML(grille.getNiveauPerformance4());%> 
-		        <td>
-		          <%=tmp%>
-		        </td>
-		      </tr>
-		       
+	        	<td>
+	           	<%=tmp%>
+	        	</td>	
+	         </tr>   
 		       <% 
 		       Set <Critere> criteres = grille.getCriteres();
 		       for(Critere critere : criteres)
 		    	{
 		       %>
 		       <tr>
-		        <th>Critère n°<%=critere.getId()%></th>
+		        <th>Critère n°<%=critere.getId()%> : <%=critere.getDescription()%></th>
+		         <td>
+		        	<%=critere.getDescNiveauPerformance1()%>
+		        </td>
+		        <td>
+		        	<%=critere.getDescNiveauPerformance2()%>
+		        </td>
+		        <td>
+		        	<%=critere.getDescNiveauPerformance3()%>
+		        </td>
+		        <td>
+		        	<%=critere.getDescNiveauPerformance4()%>
+		        </td>
 		       </tr>
 		       <%
 		  }

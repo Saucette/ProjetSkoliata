@@ -173,11 +173,53 @@ insert into critere values (nextval('critere_id_seq'), '1','Gérer les versions d
 'Aucun document ne contient les informations nécessaires pour le suivi et le versionning des documents'
 );
  
-insert into critere values (nextval('critere_id_seq'), '1', 'Trouver la couverture fonctionnelle à partir d''un texte de besoins détaillé ou des indications du client', 
+insert into critere values (nextval('critere_id_seq'), '1', 'Trouver la couverture fonctionnelle à partir des indications du client', 
 'Toutes les fonctions explicitées par le client sont présentes',
 'La majorité des fonctions explicitées par le client sont présentes',
 'Une partie des fonctions explicitées par le client sont présentes',
 'Très peu des fonctions explicitées par le client sont présentes'
+);
+
+insert into critere values (nextval('critere_id_seq'), '2','Respecter les délais de livraison', 
+'La livraison a été faite avant la date limite',
+'La livraison a été faite après la date limite mais soit l''étudiant peut justifier le retard soit le retard n''est pas significatif',
+'La livraison a été faite bien après la date limite sans justification',
+''
+);
+
+insert into critere values (nextval('critere_id_seq'), '2','Générer le schéma théorique', 
+'L''étudiant a proposé un choix de conception du modèle théorique cohérent répondant à toutes les attentes du client ',
+'L''étudiant a proposé une solution perfectible ou incomplète ',
+'L''étudiant a proposé une solution insuffisante qui ne permet pas de passer en phase de développement sereinement',
+''
+);
+
+insert into critere values (nextval('critere_id_seq'), '2','Gérer les versions de la documentation',
+'Tous les documents contiennent les informations suivantes : nom du document, nom des auteurs, date de réalisation, numéro de version et numération des pages. La présentation de ces informations respecte un canevas uniforme',
+'Tous les documents contiennent au minimum les informations suivantes : nom du document, nom des auteurs, date de réalisation. La présentation de ces informations souvent ne respecte pas un canevas uniforme',
+'Aucun document ne contient les informations nécessaires pour le suivi et le versionning des documents',
+''
+);
+
+insert into critere values (nextval('critere_id_seq'), '3','Faire une réanimation cardiaque',
+'L''apprenti secouriste sait prodiguer les gestes appropriés à la réanimation d''une personne en arrêt cardio-respiratoire sans interruption, hésitation',
+'L''apprenti secouriste fait une erreur majeure qui peut conduire à la mort de la victime, et/ou hésite trop lors de l''execution de la procédure',
+'',
+''
+);
+
+insert into critere values (nextval('critere_id_seq'), '3','Hémorragie externe',
+'L''apprenti secouriste utilise le coussin hémostatique et a le bon réflexe d''arrêter l''hémorragie rapidement en rassurant la victime et en lui administrant de l''oxygène',
+'L''apprenti secouriste n''utilise pas le coussin, n''utilise pas d''O2 et attend trop avant de s''occuper de la plaie',
+'',
+''
+);
+
+insert into critere values (nextval('critere_id_seq'), '3','Malaise breton',
+'L''apprenti secouriste met la victime en PLS, prend les constantes régulièrement, rassure la victime et vérifie que la victime ne s''étouffe pas si elle vomit',
+'L''apprenti secouriste ne rassure pas ou peu la victime, oublie la PLS, laisse s''étouffer la victime dans son vomi, ne prend pas les constantes',
+'',
+''
 );
 
 -- ASSO 3E -------------------------------------------------------------------------------------------------

@@ -16,7 +16,7 @@ public class ObjectifPedagogique implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="OBJECTIF_PEDAGOGIQUE_ID_GENERATOR", sequenceName="OBJECTIF_PEDAGOGIQUE_ID_SEQ")
+	@SequenceGenerator(name="OBJECTIF_PEDAGOGIQUE_ID_GENERATOR", sequenceName="OBJECTIF_PEDAGOGIQUE_ID_SEQ",allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="OBJECTIF_PEDAGOGIQUE_ID_GENERATOR")
 	private Integer id;
 
