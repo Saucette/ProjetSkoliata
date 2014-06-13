@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -37,15 +37,15 @@ public class Grille implements Serializable {
 
 	//bi-directional many-to-one association to AssoOge
 	@OneToMany(mappedBy="grille")
-	private Set<AssoOge> assoOges;
+	private List<AssoOge> assoOges;
 
 	//bi-directional many-to-one association to Critere
 	@OneToMany(mappedBy="grille")
-	private Set<Critere> criteres;
+	private List<Critere> criteres;
 
 	//bi-directional many-to-one association to Droit
 	@OneToMany(mappedBy="grille")
-	private Set<Droit> droits;
+	private List<Droit> droits;
 
 	//bi-directional many-to-many association to Enseignant
 	@ManyToMany
@@ -58,7 +58,7 @@ public class Grille implements Serializable {
 			@JoinColumn(name="id_enseignant")
 			}
 		)
-	private Set<Enseignant> enseignants;
+	private List<Enseignant> enseignants;
 
 	public Grille() {
 	}
@@ -119,11 +119,11 @@ public class Grille implements Serializable {
 		this.valide = valide;
 	}
 
-	public Set<AssoOge> getAssoOges() {
+	public List<AssoOge> getAssoOges() {
 		return this.assoOges;
 	}
 
-	public void setAssoOges(Set<AssoOge> assoOges) {
+	public void setAssoOges(List<AssoOge> assoOges) {
 		this.assoOges = assoOges;
 	}
 
@@ -141,11 +141,11 @@ public class Grille implements Serializable {
 		return assoOge;
 	}
 
-	public Set<Critere> getCriteres() {
+	public List<Critere> getCriteres() {
 		return this.criteres;
 	}
 
-	public void setCriteres(Set<Critere> criteres) {
+	public void setCriteres(List<Critere> criteres) {
 		this.criteres = criteres;
 	}
 
@@ -163,11 +163,11 @@ public class Grille implements Serializable {
 		return critere;
 	}
 
-	public Set<Droit> getDroits() {
+	public List<Droit> getDroits() {
 		return this.droits;
 	}
 
-	public void setDroits(Set<Droit> droits) {
+	public void setDroits(List<Droit> droits) {
 		this.droits = droits;
 	}
 
@@ -185,23 +185,12 @@ public class Grille implements Serializable {
 		return droit;
 	}
 
-	public Set<Enseignant> getEnseignants() {
+	public List<Enseignant> getEnseignants() {
 		return this.enseignants;
 	}
 
-	public void setEnseignants(Set<Enseignant> enseignants) {
+	public void setEnseignants(List<Enseignant> enseignants) {
 		this.enseignants = enseignants;
-	}
-
-	@Override
-	public String toString() {
-		return "Grille [id=" + id + ", niveauPerformance1="
-				+ niveauPerformance1 + ", niveauPerformance2="
-				+ niveauPerformance2 + ", niveauPerformance3="
-				+ niveauPerformance3 + ", niveauPerformance4="
-				+ niveauPerformance4 + ", nom=" + nom + ", valide=" + valide
-				+ ", assoOges=" + assoOges + ", criteres=" + criteres
-				+ ", droits=" + droits + ", enseignants=" + enseignants + "]";
 	}
 
 }

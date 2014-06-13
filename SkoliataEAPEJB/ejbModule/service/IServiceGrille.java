@@ -1,7 +1,6 @@
 package service;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Remote;
 
@@ -51,7 +50,7 @@ public interface IServiceGrille {
 			String description_n1, String description_n2,
 			String description_n3, String description_n4);
 
-	/** Obtention d'un critère d'une grille
+	/** Obtention d'un critère à partir de son id et du nom d'une grille
 	 * 
 	 * @param nom_grille nom de la grille
 	 * @param id_critere id du critère
@@ -60,7 +59,7 @@ public interface IServiceGrille {
 	
 	Critere getCritereByGrille(String nom_grille, Integer id_critere);
 
-	/** Passage de l'état de la grille à "valide"
+	/** Validation d'une grille
 	 * 
 	 * @param nom_grille à valider
 	 */
@@ -78,5 +77,20 @@ public interface IServiceGrille {
 	 * @param id_grille id de la grille
 	 * @return
 	 */
-	Set <Critere> getAllCritereById(Integer id_grille);
+	List <Critere> getAllCritereById(Integer id_grille);
+
+	/** Suppression d'une grille
+	 * 
+	 * @param id_grille id de la grille
+	 */
+	
+	void delete(Integer id_grille);
+	
+	/** Copie d'une grille existante
+	 * 
+	 * @param nom_g1
+	 * @return
+	 */
+	
+	Grille copy(String nom_g1);
 }

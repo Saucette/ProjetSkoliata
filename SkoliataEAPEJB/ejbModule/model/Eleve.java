@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -28,7 +28,7 @@ public class Eleve implements Serializable {
 
 	//bi-directional many-to-one association to Asso3e
 	@OneToMany(mappedBy="eleve")
-	private Set<Asso3e> asso3es;
+	private List<Asso3e> asso3es;
 
 	public Eleve() {
 	}
@@ -65,11 +65,11 @@ public class Eleve implements Serializable {
 		this.prenom = prenom;
 	}
 
-	public Set<Asso3e> getAsso3es() {
+	public List<Asso3e> getAsso3es() {
 		return this.asso3es;
 	}
 
-	public void setAsso3es(Set<Asso3e> asso3es) {
+	public void setAsso3es(List<Asso3e> asso3es) {
 		this.asso3es = asso3es;
 	}
 

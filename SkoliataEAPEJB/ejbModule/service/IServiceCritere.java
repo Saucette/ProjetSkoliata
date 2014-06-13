@@ -8,8 +8,5 @@ import model.Critere;
 public interface IServiceCritere {
 
 	Critere getCritere(Integer id_critere);
-
-	
-	
 	
 }

@@ -14,7 +14,7 @@ public class ServiceEnseignement implements IServiceEnseignement {
      * Default constructor. 
      */
     public ServiceEnseignement() {
-        // TODO Auto-generated constructor stub
+    	 // TODO A compléter (cf cahier de charges)
     }
 
 }

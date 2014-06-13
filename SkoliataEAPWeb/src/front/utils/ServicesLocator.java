@@ -41,16 +41,11 @@ public class ServicesLocator
 	 * @throws ServiceLocatorException lev√© en cas de probl√®mes li√©s √† la recherche.
 	 */
 	public Object getRemoteInterface(String nomEJB) throws ServicesLocatorException
-	{
-		// Nom JNDI de la forme :
-		//   java:global/<nom projet EAR>/<nom sous-projet EJB>/<nom bean session EJB>!<nom complet avec package de l'interface remote du bean>
-		// Exemple :
-		//   java:global/CabinetRecrutement_EAR/CabinetRecrutement_EJB/ServiceEntreprise!eu.telecom_bretagne.cabinet_recrutement.service.IServiceEntreprise
-		
+	{	
 		String nomJNDI = null;
 		
 		if(nomEJB.equals("ServiceEnseignant"))
-			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ServiceEnseignant!service.IServiceEnseignant";
+			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ServiceEnseignant!service.ServiceEnseignant";
 
 		else if(nomEJB.equals("ServiceEleve"))
 			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ServiceEleve!service.ServiceEleve";
@@ -67,12 +62,12 @@ public class ServicesLocator
 		else if(nomEJB.equals("ServiceGrille"))
 			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/ServiceGrille!service.ServiceGrille"; 
 
-		// Pour les contr√¥les de DAO par les √©l√®ves
+		// Pour les contrÙles de DAO par les ÈlËves
 		// ========================================
 		
-		// ATTENTION !!! La r√©cup√©ration d'un DAO n'existe ici que
-		// pour les contr√¥les (utilis√©s dans la servlet ControleDAOServlet) :
-		// ils ne sont normalement pas appel√©s par la couche IHM.
+		// ATTENTION !!! La rÈcupÈration d'un DAO n'existe ici que
+		// pour les contrÙles (utilisÈs dans la servlet ControleDAOServlet) :
+		// ils ne sont normalement pas appelÈs par la couche IHM.
 		
 		else if(nomEJB.equals("CritereDAO"))
 			nomJNDI = "java:global/SkoliataEAP/SkoliataEAPEJB/CritereDAO";

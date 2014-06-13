@@ -86,7 +86,18 @@ public class GrilleDAO
 		// L'entité était déjà attachée ou a été rattachée, on peut donc la supprimer...
 		entityManager.remove(grille);
 	}
-	
+	//-------------------------------------------------------------------------------
+//	public void delete(Integer id_grille)
+//	{
+//		Query query1 = entityManager.createQuery("DELETE FROM critere WHERE critere.id_grille = :id_grille");
+//		query1.setParameter("id_grille", id_grille);
+//		
+//		Query query2 = entityManager.createQuery("DELETE FROM asso_oge WHERE asso_oge.id_grille = :id_grille");
+//		query2.setParameter("id_grille", id_grille);
+//		
+//		Query query3 = entityManager.createQuery("DELETE FROM grille WHERE grille.id = :id_grille");
+//		query3.setParameter("id_grille", id_grille);
+//	}
 	//-----------------------------------------------------------------------------
 	public void validation(String nom_grille)
 	{

@@ -1,9 +1,9 @@
 -- Titre :             Création base skoliata.sql
--- Version :           1.1
--- Date création :     29.04.11
--- Date modification : 05.05.11
+-- Version :           1.2
+-- Date création :     29.04.14
+-- Date modification : 13.06.14
 -- Auteur :            Collet Hugo
--- Description :       Script de création de la base de données pour le SI "skoliata"
+-- Description :       Script de création de la base de données pour le SI d'exemple "Skoliata"
 --                     Note : script pour PostgreSQL 8.4
 --                     Ebauche du script : premier jet pour la création de la bdd.
 
@@ -21,8 +21,11 @@ drop table if exists ASSO_OGE CASCADE;
 drop table if exists DROIT CASCADE;
 
 -- +----------------------------------------------------------------------------------------------+
--- | Création des tables                                                                          |
+-- | Création des tables 								                                          |
 -- +----------------------------------------------------------------------------------------------+
+--
+-- Cette série de table n'a pas besoin de descriptino de ses champs : ils portent des noms explicites
+-- Les NOT NULL permettent d'éviter des erreurs de type données incomplètes, et de forcer l'utilisateur à remplir ces champs
 
 CREATE TABLE enseignant
 (
@@ -52,7 +55,7 @@ CREATE TABLE enseignement
 	nom varchar(100) not null
 ) ;
 
--- Méthode d'auto-génération des noms des grilles à déterminer avec Mayte
+-- Méthode d'auto-génération des noms des grilles à déterminer avec Mayte : il peut être générésoit via le Java, soit via une séquence PostgreSQL
 
 CREATE TABLE grille
 (
@@ -65,9 +68,11 @@ CREATE TABLE grille
     niveau_performance_4 varchar(50) 			
 ) ;
 
--- La description du niveau de performance X de la table critère correspond au niveau de performance X de la table grille
--- Exemple : desc_niveau_performance 1 = "L'étudiant a rendu le projet terminé à 100%" -- niveau_performance_1 = "Très Bien"
-
+-- La description du niveau de performane "desc_niveau_performance_X" de la table CRITERE correspond au niveau de performance X "niveau_performance_X" de la table grille
+-- Exemple : desc_niveau_performance 1 = "L'étudiant a rendu le projet terminé à 100% dans les temps" -- niveau_performance_1 = "Très Bien"
+--			 desc_niveau_performance 2 = "L'étudiant a rendu le projet terminé à 80% ou/et avec un léger retard" -- niveau_performance_2 = "Bien"
+--			 desc_niveau_performance 3 = "L'étudiant a rendu le projet terminé à 50% ou/et avec un retard conséquent" -- niveau_performance_3 = "Passable"
+--			 desc_niveau_performance 4 = "L'étudiant a rendu le projet terminé à moins de 50% ou/et avec un retard considérable" -- niveau_performance_4 = "Insuffisant"
 CREATE TABLE critere 
 (
 	id serial primary key,
@@ -101,8 +106,10 @@ CREATE TABLE ASSO_3E
  ) ;
  
  -- Par défaut : un enseignant quelconque possède un droit de lecture sur toutes les grilles,
--- On ne représente dans cette table uniquement les droits autres que le droit de lecture par défaut
--- Id est, un droit global qui comprend : modification, suppression...etc.
+-- On représente les droits autres que le droit de lecture par défaut dans cette table
+-- Notion de droit à définir plus précisément : 
+-- - soit : un droit global qui comprend : modification, suppression...etc.
+-- - soit : des droits distincts : suppression, modification, copie, édition d'un champ particulier (si un tuteur ne doit noter qu'une partie de la grille)...
 
 CREATE TABLE DROIT
 (

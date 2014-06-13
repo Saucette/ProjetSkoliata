@@ -5,12 +5,12 @@
                model.Grille,
                model.Critere,
                front.utils.Utils,
-               java.util.Set,
                java.util.List"%>
 
 <%
   	String idString = request.getParameter("id");
   	String tmp = new String();
+  	int cpt = 1;
 	IServiceGrille serviceGrille = (IServiceGrille) ServicesLocator.getInstance().getRemoteInterface("ServiceGrille");
 	List<Grille> grilles = serviceGrille.getAllGrille();
 %>
@@ -20,12 +20,12 @@
 
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Skoliata ~ Informations de la grille </title>
+    <title>Skoliata</title>
     <link rel="stylesheet" href="styles.css" type="text/css" />
   </head>
 
+<%-- On teste si le paramètre id a été modifié auparavant : l'utilisateur aurait donc cliqué sur une grille si id n'est pas nul --%>
   <body>
-  
 		<%
 		  if(idString == null)
 		  {
@@ -35,12 +35,13 @@
 		  }
 		  else
 		  {
+			  
         	int id = Integer.parseInt(idString);
 		    Grille grille = serviceGrille.getById(id);
 		  	System.out.println("--------------------> grille = " + grille);
 		    %>
 		    
-		    <!-- Affichage des information récupérées --> 
+		    <!-- Affichage des informations récupérées --> 
 		    <h2>Informations sur la grille : <%=grille.getNom() %></h2>
 		    <table id="affichage">
 		    <tr>
@@ -70,12 +71,14 @@
 	        	</td>	
 	         </tr>   
 		       <% 
-		       Set <Critere> criteres = grille.getCriteres();
+		       List <Critere> criteres = grille.getCriteres();
 		       for(Critere critere : criteres)
 		    	{
 		       %>
 		       <tr>
-		        <th>Critère n°<%=critere.getId()%> : <%=critere.getDescription()%></th>
+		        <th>Critère n°<%=cpt++%> : <%=critere.getDescription()%> <br>
+		        <a href="modifier_critere.jsp?id=<%=critere.getId()%>">Modifier</a></th>
+		        
 		         <td>
 		        	<%=critere.getDescNiveauPerformance1()%>
 		        </td>
@@ -89,18 +92,20 @@
 		        	<%=critere.getDescNiveauPerformance4()%>
 		        </td>
 		       </tr>
-		       <%
-		  }
-		%>  
+		      <%}%>
 		    </table>
+		    </body>
+		  <%if(!grille.getValide())
+		  {%>
+		<a href="ajout_critere.jsp?id=<%=grille.getId()%>">Ajouter un critère</a><br>
+		<a href="ajout_niveau.jsp?id=<%=grille.getId()%>">Ajouter un niveau</a><br>
+		<a href="valider_grille.jsp?id=<%=grille.getId()%>">Valider la grille</a><br>
+		<%}%>
+		<a href="supprimer_grille.jsp?id=<%=grille.getId()%>">Supprimer la grille</a><br>
+		<a href="copier_grille.jsp?id=<%=grille.getId()%>">Copier la grille</a><br>
         <a href="liste_grilles.jsp">Retour à la liste des grilles</a>
-
-		    <%
-		  }
-		%>
-		
-  </body>
-  
+        
+        <%}%>
 </html>
 
 

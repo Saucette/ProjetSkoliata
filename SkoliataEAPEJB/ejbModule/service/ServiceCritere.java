@@ -25,6 +25,12 @@ public class ServiceCritere implements IServiceCritere {
     	{
     		return critereDAO.findById(id_critere);
     	}
+
+//    	@Override 
+//    	public void delete(Integer id_critere)
+//    	{
+//    		critereDAO.remove(critereDAO.findById(id_critere));
+//    	}
     }
 
 

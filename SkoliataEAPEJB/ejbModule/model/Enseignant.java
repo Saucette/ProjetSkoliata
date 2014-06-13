@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 
 /**
@@ -28,15 +28,15 @@ public class Enseignant implements Serializable {
 
 	//bi-directional many-to-one association to Asso3e
 	@OneToMany(mappedBy="enseignant")
-	private Set<Asso3e> asso3es;
+	private List<Asso3e> asso3es;
 
 	//bi-directional many-to-one association to Droit
 	@OneToMany(mappedBy="enseignant")
-	private Set<Droit> droits;
+	private List<Droit> droits;
 
 	//bi-directional many-to-many association to Grille
 	@ManyToMany(mappedBy="enseignants")
-	private Set<Grille> grilles;
+	private List<Grille> grilles;
 
 	public Enseignant() {
 	}
@@ -73,11 +73,11 @@ public class Enseignant implements Serializable {
 		this.prenom = prenom;
 	}
 
-	public Set<Asso3e> getAsso3es() {
+	public List<Asso3e> getAsso3es() {
 		return this.asso3es;
 	}
 
-	public void setAsso3es(Set<Asso3e> asso3es) {
+	public void setAsso3es(List<Asso3e> asso3es) {
 		this.asso3es = asso3es;
 	}
 
@@ -95,11 +95,11 @@ public class Enseignant implements Serializable {
 		return asso3e;
 	}
 
-	public Set<Droit> getDroits() {
+	public List<Droit> getDroits() {
 		return this.droits;
 	}
 
-	public void setDroits(Set<Droit> droits) {
+	public void setDroits(List<Droit> droits) {
 		this.droits = droits;
 	}
 
@@ -117,11 +117,11 @@ public class Enseignant implements Serializable {
 		return droit;
 	}
 
-	public Set<Grille> getGrilles() {
+	public List<Grille> getGrilles() {
 		return this.grilles;
 	}
 
-	public void setGrilles(Set<Grille> grilles) {
+	public void setGrilles(List<Grille> grilles) {
 		this.grilles = grilles;
 	}
 
